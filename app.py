@@ -62,7 +62,7 @@ interface = gr.Interface(fn=predict_and_map, inputs=[year_slider, month_slider],
 def index():
     m = folium.Map()
     m.save("index.html")
-    interface.launch()
+    interface.launch(share=True)
     return render_template('index.html')
 
 # @app.route('/gradio')
