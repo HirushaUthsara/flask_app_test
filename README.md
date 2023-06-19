@@ -1,10 +1,17 @@
-# Deploy a Python (Flask) web app to Azure App Service - Sample Application
+# Climate ML Model
 
-This is the sample Flask application for the Azure Quickstart [Deploy a Python (Django or Flask) web app to Azure App Service](https://docs.microsoft.com/en-us/azure/app-service/quickstart-python). For instructions on how to create the Azure resources and deploy the application to Azure, refer to the Quickstart article.
+This repository contains a machine learning model for climate prediction. The model is trained using historical climate data and can be used to make predictions about future climate conditions.
 
-Sample applications are available for the other frameworks here:
+## Features
 
-* Django [https://github.com/Azure-Samples/msdocs-python-django-webapp-quickstart](https://github.com/Azure-Samples/msdocs-python-django-webapp-quickstart)
-* FastAPI [https://github.com/Azure-Samples/msdocs-python-fastapi-webapp-quickstart](https://github.com/Azure-Samples/msdocs-python-fastapi-webapp-quickstart)
+- Utilizes a deep learning architecture for climate prediction
+- Handles input data preprocessing and feature engineering
+- Provides an easy-to-use API for making predictions
+- Includes sample data for testing and demonstration purposes
 
-If you need an Azure account, you can [create one for free](https://azure.microsoft.com/en-us/free/).
+## Installation
+
+1. Clone the repository:
+
+   ```shell
+   git clone https://github.com/your-username/climate-ml-model.git

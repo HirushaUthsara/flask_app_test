@@ -1,32 +1,74 @@
-import os
+from flask import Flask, render_template
+import gradio as gr
+import numpy as np
+import pandas as pd
+import folium
 
-from flask import (Flask, redirect, render_template, request,
-                   send_from_directory, url_for)
+# # Load your machine learning model and data
+# # Replace this with your own model and data loading code
+# def load_model():
+#     # Load your ML model here
+#     pass
 
+# def load_data():
+#     # Load your data here
+#     # Replace this with your own data loading code
+#     data = pd.read_csv("historical_data.csv")
+#     return data
+
+# def predict_precipitation(year, month):
+#     # Your machine learning model prediction code here
+#     # Replace this with your own prediction code using the loaded model and data
+#     prediction = np.random.uniform(low=0, high=100, size=(1,))  # Dummy example
+#     return prediction[0]
+
+# Create the Flask app
 app = Flask(__name__)
 
+# # Load the model and data
+# model = load_model()
+# data = load_data()
 
+# Define the Gradio interface
+year_slider = gr.inputs.Slider(minimum=1970, maximum=2005, default=2000, step=1, label="Year")
+month_slider = gr.inputs.Slider(minimum=1, maximum=12, default=6, step=1, label="Month")
+
+# def predict_and_map(year, month):
+#     # Make the prediction using the selected year and month
+#     prediction = predict_precipitation(year, month)
+
+#     # Create a map with the predicted precipitation
+#     location = (8.0260, 79.8471)  # Replace with the actual coordinates of your location
+#     m = folium.Map(location=location, zoom_start=10)
+#     folium.CircleMarker(
+#         location=location,
+#         radius=10,
+#         color='blue',
+#         fill=True,
+#         fill_color='blue',
+#         fill_opacity=prediction / 100,  # Scale opacity based on prediction value
+#     ).add_to(m)
+
+#     return m
+
+def predict_and_map(year,month):
+    pass
+output_text = gr.outputs.Textbox(label="Output Text")
+
+interface = gr.Interface(fn=predict_and_map, inputs=[year_slider, month_slider],outputs=output_text)
+
+# Define the Flask routes
 @app.route('/')
 def index():
-   print('Request for index page received')
-   return render_template('index.html')
+    m = folium.Map()
+    m.save("index.html")
+    interface.launch()
+    return render_template('index.html')
 
-@app.route('/favicon.ico')
-def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'),
-                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
+# @app.route('/gradio')
+# def gradio():
+#     return interface.launch()
 
-@app.route('/hello', methods=['POST'])
-def hello():
-   name = request.form.get('name')
-
-   if name:
-       print('Request for hello page received with name=%s' % name)
-       return render_template('hello.html', name = name)
-   else:
-       print('Request for hello page received with no name or blank name -- redirecting')
-       return redirect(url_for('index'))
-
-
-if __name__ == '__main__':
-   app.run()
+# Run the Flask app
+if __name__ == "__main__":
+    app.run(debug=True)
