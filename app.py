@@ -3,6 +3,19 @@ import gradio as gr
 import numpy as np
 import pandas as pd
 import folium
+from pymongo.mongo_client import MongoClient
+from urllib.parse import quote_plus
+
+# Replace the placeholder with your Atlas connection string
+username = "hirusha"
+password = "hiru@mongodb"
+cluster_name = "cluster0"
+uri = f"mongodb+srv://{quote_plus(username)}:{quote_plus(password)}@{cluster_name}.dlrxsa6.mongodb.net/?retryWrites=true&w=majority"
+
+# Create a new client and connect to the server
+client = MongoClient(uri)
+
+
 
 # # Load your machine learning model and data
 # # Replace this with your own model and data loading code
